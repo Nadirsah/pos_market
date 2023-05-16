@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers\Back;
 
+use Maatwebsite\Excel\Validators\ValidationException;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
 use App\Http\Requests\UserRequest;
+use App\Exports\UsersExport;
+use App\Imports\UsersImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Profil extends Controller
 {
@@ -83,4 +87,21 @@ class Profil extends Controller
 
         return redirect()->route('admin.profil.index')->with('message', 'Məlumat silindi!');
     }
+
+    public function export() 
+    {
+        return Excel::download(new UsersExport, 'users.xlsx');
+    }
+
+    public function import()
+{
+    try {
+        Excel::import(new UsersImport, request()->file('file'));
+    } catch (ValidationException $e) {
+        $failures = $e->failures();
+        // Hata işleme kodu buraya gelebilir
+    }
+
+    return back();
+}
 }

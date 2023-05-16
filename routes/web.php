@@ -3,6 +3,7 @@
 use App\Http\Controllers\Back\AuthController;
 use App\Http\Controllers\Back\Ayarlar;
 use App\Http\Controllers\Back\Profil;
+use App\Http\Controllers\Back\Excel;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,9 +31,15 @@ Route::prefix('admin')->name('admin.')->middleware('isAdmin')->group(function ()
     //Profil
     Route::resource('/profil',Profil::class);
     Route::get('/delete/{id}', [Profil::class, 'delete'])->name('delete');
+
+    //Excel
+    Route::get('/excel',[Excel::class,'index'])->name('excel');
    
 });
 
 Route::get('/error',function(){
     return view('error');
 });
+
+Route::get('users-export', [Profil::class, 'export'])->name('users.export');
+Route::post('users-import', [Profil::class, 'import'])->name('users.import');

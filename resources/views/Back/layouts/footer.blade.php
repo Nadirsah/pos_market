@@ -4,7 +4,7 @@
 <footer class="sticky-footer bg-white">
     <div class="container my-auto">
         <div class="copyright text-center my-auto">
-            <span>Copyright &copy; Your Website {{date("Y")}}</span>
+            <span>Copyright &copy; Pos_Market {{date("Y")}}</span>
         </div>
     </div>
 </footer>
@@ -65,7 +65,36 @@
 
 
 
+<style>
+    html, body {
+  height: 100%;
+}
 
+#wrapper {
+  min-height: 100%;
+  position: relative;
+}
+
+#content-wrapper {
+  flex: 1 0 auto;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 60px; /* Set the height of your footer */
+}
+
+</style>
 </body>
 
 </html>
+
+
+
+
+
+
+
+
